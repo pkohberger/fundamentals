@@ -1,0 +1,46 @@
+#!/usr/bin/python
+
+import os
+
+class QuickSort(object):
+
+    def __init__(self,data):
+
+        self.quick_sort(data,0,len(data) - 1)
+
+    def quick_sort(self,data,low,high):
+
+        if low < high:
+            partition = self.partition(data,low,high)
+            self.quick_sort(data,low,partition - 1)
+            self.quick_sort(data,partition + 1,high)
+
+    def partition(self,data,low,high):
+
+        print("Low " + str(low) + " High " + str(high))
+        print(data)
+
+        pivot = low
+
+        concater = ""
+        for j in range(low + 1 ,high + 1):
+
+            concater += str(data[j]) + ", "
+
+            if data[j] <= data[low]:
+                pivot += 1
+                print("pivot " + str(pivot) + " j " + str(j))
+                data[j], data[pivot] = data[pivot], data[j]
+                print(data)
+
+        data[pivot], data[low] = data[low], data[pivot]
+
+        print("[" + concater.strip() + "]")
+        print(data)
+        print("\n")
+
+        return pivot
+
+    
+
+QuickSort([17,41,5,22,54,6,29,3,13])
