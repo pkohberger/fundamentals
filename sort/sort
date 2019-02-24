@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
 import os
+import ptvsd
+
+ptvsd.enable_attach(address = ('192.168.33.10', 3000))
+#ptvsd.wait_for_attach()
 
 class QuickSort(object):
 
@@ -41,6 +45,49 @@ class QuickSort(object):
 
         return pivot
 
-    
+#QuickSort([7,3,5,1])
 
-QuickSort([17,41,5,22,54,6,29,3,13])
+class MergeSort(object):
+
+    def __init__(self,data):
+
+        self.merge_sort(data)
+        print(data)
+
+    def merge_sort(self,data):
+
+        print(data)
+        if len(data) > 1:
+            left, right = self.partition(data)
+            self.merge_sort(left)
+            self.merge_sort(right)
+
+            i = j = k = 0
+          
+            # Copy data to temp data left[] and right[] 
+            while i < len(left) and j < len(right): 
+                if left[i] < right[j]: 
+                    data[k] = left[i] 
+                    i+=1
+                else: 
+                    data[k] = right[j] 
+                    j+=1
+                k+=1
+            
+            # Checking if any element was left 
+            while i < len(left): 
+                data[k] = left[i] 
+                i+=1
+                k+=1
+            
+            while j < len(right): 
+                data[k] = right[j] 
+                j+=1
+                k+=1
+
+    def partition(self,data):
+
+        mid = int(len(data)/2)
+        return data[:mid], data[mid:]
+
+MergeSort([7,3,5,1,8])
